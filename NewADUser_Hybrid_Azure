@@ -7,7 +7,7 @@ IMPORTANT: Line 28 -searchbase needs to be changed for the client. Currently wor
 
 #>
 #Asks for domain and saves to $EmailDomain variable
-$EmailDomain = Read-Host -Prompt "Enter the email domain including the @ symbol. ie @intermixit.com"
+$EmailDomain = Read-Host -Prompt "Enter the email domain including the @ symbol. ie @example.com"
 
 
 #User Information 
