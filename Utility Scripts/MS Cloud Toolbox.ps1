@@ -10,11 +10,12 @@ Function Show-Menu {
     Write-Host "Available Tools: Microsoft Graph, AzureAD, MSOnline, Azure, Exchange Online (V2)"
 
 
-    Write-Host "1: Press '0' to Install Microsoft Graph."
-    Write-Host "2: Press '1' to Install AzureAD."
-    Write-Host "3: Press '2' to Install MSOnline."
-    Write-Host "4: Press '3' to Install Azure."
-    Write-Host "5: Press '4' to Install Exchange Online (V2)."
+    Write-Host "0: Press '0' to Install Microsoft Graph"
+    Write-Host "1: Press '1' to Install AzureAD"
+    Write-Host "2: Press '2' to Install MSOnline"
+    Write-Host "3: Press '3' to Install Azure PowerShell"
+    Write-Host "4: Press '4' to Install Exchange Online (V2)"
+    Write-Host "5: Press '5' to Install All Modules"
 
     Write-Host "Q: Press 'Q' to quit."
 }
@@ -22,9 +23,22 @@ Function Show-Menu {
 
 
 #Installing Required Repos for Module Installation and setting PS Gallery as Trusted
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
 Set-PSRepository "PSGallery" -InstallationPolicy Trusted
+
+#ScriptBlock for Option 5 in the menu
+$AllModules = {
+$Modules = "Microsoft.Graph","AzureAD","MSOnline","Az","ExchangeOnlineManagement" 
+
+foreach ($Module in $Modules) {
+
+    Write-Host "Installing $Module" -ForegroundColor Green
+    Install-Module -Name $Module -Force -Verbose
+
+
+}
+}
+
 
 #Do/Until Loop for Installs and Menu Selection
     do
@@ -53,6 +67,10 @@ Set-PSRepository "PSGallery" -InstallationPolicy Trusted
         }
     '4' {
             Install-Module -Name ExchangeOnlineManagement -Force
+
+        }
+    '5' {
+            Invoke-Command -ScriptBlock $AllModules
 
         }
     }
