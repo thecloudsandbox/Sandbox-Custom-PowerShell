@@ -22,22 +22,9 @@ Function Show-Menu {
 
 
 #Installing Required Repos for Module Installation and setting PS Gallery as Trusted
-#Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
-#Set-PSRepository "PSGallery" -InstallationPolicy Trusted
-
-$AllModules = {
-Write-Progress -Activity "Installing all modules..." -Id 1 -Status "Installing..." -PercentComplete 0
-Write-Progress -Activity "Installing Microsoft Graph" -Id 2 -ParentId 1 -Status "Installing..." -PercentComplete 20
-Install-Module -Name Microsoft.Graph -Force
-Write-Progress -Activity "Installing Azure AD" -Id 3 -ParentId 1 -Status "Installing..." -PercentComplete 40
-Install-Module -Name AzureAD -Force
-Write-Progress -Activity "Installing MSOnline" -Id 4 -ParentId 1 -Status "Installing..." -PercentComplete 60
-Install-Module -Name MSOnline -Force
-Write-Progress -Activity "Installing Azure PS" -Id 5 -ParentId 1 -Status "Installing..." -PercentComplete 80
-Install-Module -Name Az -Force
-Write-Progress -Activity "Installing Exchange Online" -Id 6 -ParentId 1 -Status "Installing..." -PercentComplete 100
-Install-Module -Name ExchangeOnlineManagement -Force
-}
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
+Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
+Set-PSRepository "PSGallery" -InstallationPolicy Trusted
 
 #Do/Until Loop for Installs and Menu Selection
     do
