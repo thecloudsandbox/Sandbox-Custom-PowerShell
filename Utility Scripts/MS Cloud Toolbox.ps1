@@ -25,20 +25,41 @@ Function Show-Menu {
 #Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
 #Set-PSRepository "PSGallery" -InstallationPolicy Trusted
 
+$AllModules = {
+Write-Progress -Activity "Installing all modules..." -Id 1 -Status "Installing..." -PercentComplete 0
+Write-Progress -Activity "Installing Microsoft Graph" -Id 2 -ParentId 1 -Status "Installing..." -PercentComplete 20
+Install-Module -Name Microsoft.Graph -Force
+Write-Progress -Activity "Installing Azure AD" -Id 3 -ParentId 1 -Status "Installing..." -PercentComplete 40
+Install-Module -Name AzureAD -Force
+Write-Progress -Activity "Installing MSOnline" -Id 4 -ParentId 1 -Status "Installing..." -PercentComplete 60
+Install-Module -Name MSOnline -Force
+Write-Progress -Activity "Installing Azure PS" -Id 5 -ParentId 1 -Status "Installing..." -PercentComplete 80
+Install-Module -Name Az -Force
+Write-Progress -Activity "Installing Exchange Online" -Id 6 -ParentId 1 -Status "Installing..." -PercentComplete 100
+Install-Module -Name ExchangeOnlineManagement -Force
+}
+
 #Do/Until Loop for Installs and Menu Selection
     do
  {
+$AllModules = {
+
+Install-Module -Name Microsoft.Graph -Force
+Install-Module -Name AzureAD -Force
+Install-Module -Name MSOnline -Force
+Install-Module -Name Az -Force
+Install-Module -Name ExchangeOnlineManagement -Force
+
+}
+
     Clear-Host
     Show-Menu
     $Selection = Read-Host "Please Make a Selection"
     switch ($Selection)
     {
-    '0'{
-            Install-Module -Name Microsoft.Graph -Force
-            Install-Module -Name AzureAD -Force
-            Install-Module -Name MSOnline -Force
-            Install-Module -Name Az -Force
-            Install-Module -Name ExchangeOnlineManagement -Force
+    '0'{    
+
+            Invoke-Command -ScriptBlock $AllModules  
 
         Break} 
     '1' {
