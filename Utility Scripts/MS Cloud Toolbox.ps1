@@ -21,17 +21,6 @@ Function Show-Menu {
 Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
 Set-PSRepository "PSGallery" -InstallationPolicy Trusted
 
-#ScriptBlock for Option 5 in the menu
-$AllModules = {
-$Modules = "Microsoft.Graph","AzureAD","MSOnline","Az","ExchangeOnlineManagement" 
-
-foreach ($Module in $Modules) {
-
-    Write-Verbose "Installing $Module...This may take a few minutes" -Verbose
-     Install-Module -Name $Module -Force -Verbose
-     New-DotNetToast -Title 'Success' -Message '$Module Installed'
-
-}
 Function New-DotNetToast {
     [cmdletBinding()]
     Param(
@@ -73,9 +62,17 @@ $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
 
 
 
+$Modules = "Microsoft.Graph","AzureAD","MSOnline","Az","ExchangeOnlineManagement" 
 
+$AllModules = foreach ($Module in $Modules) {
+
+    Write-Verbose "Installing $Module...This may take a few minutes" -Verbose
+     Install-Module -Name $Module -Force -Verbose
+     New-DotNetToast -Title 'Success' -Message '$Module Installed'
 
 }
+
+
 
 #Do/Until Loop for Installs and Menu Selection
     do
@@ -107,7 +104,7 @@ $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
 
         }
     '5' {
-            Invoke-Command -ScriptBlock $AllModules
+           $AllModules
 
         }
     }
@@ -115,6 +112,8 @@ $Toast = [Windows.UI.Notifications.ToastNotification]::new($ToastXml)
  
  }
  Until ($Selection -eq 'q')
+
+
 
 
 
