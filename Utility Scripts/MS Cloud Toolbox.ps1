@@ -1,3 +1,4 @@
+
 #Function for the menu
 Function Show-Menu {
     param (
@@ -18,7 +19,8 @@ Function Show-Menu {
 
 
 #Installing Required Repos for Module Installation and setting PS Gallery as Trusted
-Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
+Write-Verbose -Message "Installing Nuget and trusing PSGallery" -Verbose
+Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force -Verbose
 Set-PSRepository "PSGallery" -InstallationPolicy Trusted
 
 
