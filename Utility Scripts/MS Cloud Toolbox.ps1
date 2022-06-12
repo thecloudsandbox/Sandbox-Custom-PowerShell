@@ -4,7 +4,7 @@ Function Show-Menu {
         [string]$Title = 'MS Cloud Toolbox'
     )
 
-    $Selection -eq "null"
+    #$Selection -eq "null"
     Write-Output "================ $Title ================"
     Write-Output "Available Tools: Microsoft Graph, AzureAD, MSOnline, Azure, Exchange Online (V2)"
     Write-Output "0: Press '0' to Install Microsoft Graph"
@@ -22,17 +22,15 @@ Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
 Set-PSRepository "PSGallery" -InstallationPolicy Trusted
 
 
-
+$AllModules = {
 $Modules = "Microsoft.Graph","AzureAD","MSOnline","Az","ExchangeOnlineManagement" 
 
-$AllModules = foreach ($Module in $Modules) {
+foreach ($Module in $Modules) {
 
     Write-Verbose "Installing $Module...This may take a few minutes" -Verbose
-     Install-Module -Name $Module -Force -Verbose
-  
-
+    Install-Module -Name $Module -Force -Verbose
 }
-
+}
 
 
 #Do/Until Loop for Installs and Menu Selection
@@ -45,19 +43,19 @@ $AllModules = foreach ($Module in $Modules) {
     {
 
     '0' {
-            Install-Module -Name Microsoft.Graph -Force -Scope AllUsers
+            Install-Module -Name Microsoft.Graph -Force -Verbose
            
         }
     '1' {
-            Install-Module -Name AzureAD -Force
+            Install-Module -Name AzureAD -Force -Verbose
             
         }       
     '2' {
-            Install-Module -Name MSOnline -Force
+            Install-Module -Name MSOnline -Force -Verbose
        
         }
     '3' {
-            Install-Module -Name Az -Force
+            Install-Module -Name Az -Force -Verbose
 
         }
     '4' {
@@ -65,7 +63,7 @@ $AllModules = foreach ($Module in $Modules) {
 
         }
     '5' {
-           $AllModules
+           Invoke-Command -ScriptBlock $AllModules
 
         }
     }
