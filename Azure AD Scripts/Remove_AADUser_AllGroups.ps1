@@ -1,4 +1,4 @@
-#Add Users to 365 Groups/Distribution Lists
+#Remove Users from all 365 Groups/Distribution Lists
 
 #Developed by The Cloud Sandbox at some point.....Needs revision as of 6/13/22
 
