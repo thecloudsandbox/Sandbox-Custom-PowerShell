@@ -19,10 +19,10 @@ Function Show-Menu {
 
 
 #Installing Required Repos for Module Installation and setting PS Gallery as Trusted
-Write-Verbose -Message "Installing Nuget and trusing PSGallery" -Verbose
-Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force -Verbose
+Write-Warning -Message 'This tool will help you install the Microsoft Cloud PowerShell Modules from PSGallery' 
+Write-Warning -Message "In order to use this tool NuGet must be installed. Continue?" -warningaction Inquire
+Install-PackageProvider -name Nuget -minimumversion 2.8.5.201 -force
 Set-PSRepository "PSGallery" -InstallationPolicy Trusted
-
 
 $AllModules = {
 $Modules = "Microsoft.Graph","AzureAD","MSOnline","Az","ExchangeOnlineManagement" 
