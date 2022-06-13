@@ -61,8 +61,7 @@ foreach ($Module in $Modules) {
 
         }
     '4' {
-            Install-Module -Name ExchangeOnlineManagement -Force
-
+            Install-Module -Name ExchangeOnlineManagement -Force -Verbose
         }
     '5' {
            Invoke-Command -ScriptBlock $AllModules
