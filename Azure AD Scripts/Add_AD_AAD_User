@@ -3,7 +3,7 @@ Developed by The Cloud Sandbox New User Creation Script for Hybrid 365/Azure Set
 By Jwitherspoon 4/8/22
 (Work in Progress)
 
-IMPORTANT: Line 28 -searchbase needs to be changed for the client. Currently working on making a universal variable if possible
+IMPORTANT: Line 28 -searchbase needs to be changed for the your domain. Currently working on making a universal variable if possible
 
 #>
 #Asks for domain and saves to $EmailDomain variable
